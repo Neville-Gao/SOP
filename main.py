@@ -3,7 +3,6 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import StreamingResponse
 from utils.train import generate_and_train
-from utils.visualize import save_weights_image
 from io import BytesIO
 import matplotlib.pyplot as plt
 
@@ -28,7 +27,8 @@ def train_som(request: SOMRequest):
         filename="temp_output.png",
         input_size=request.input_size
     )
-    # Convert image to base64
+
+    # Export image
     buf = BytesIO()
     plt.imshow(som.get_weights())
     plt.axis('off')

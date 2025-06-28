@@ -2,7 +2,6 @@
 import numpy as np
 import logging
 from utils.som import SOM
-from utils.visualize import save_weights_image
 
 def generate_and_train(
     seed: int,
@@ -20,7 +19,6 @@ def generate_and_train(
     input_data = rng.rand(input_size, 3)
     som = SOM(width, height, seed=seed)
     som.train(input_data, iterations)
-    save_weights_image(som.get_weights(), filename)
     error = som.evaluate(input_data)
     logging.info(f"Average quantization error: {error:.4f}")
     logging.info(f"Saved trained SOM image to {filename}")
