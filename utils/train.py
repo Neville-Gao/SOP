@@ -1,8 +1,8 @@
 # train.py
 import numpy as np
 import logging
-from som import SOM
-from visualize import save_weights_image
+from utils.som import SOM
+from utils.visualize import save_weights_image
 
 def generate_and_train(
     seed: int,

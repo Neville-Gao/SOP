@@ -1,11 +1,13 @@
+#%%
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.responses import StreamingResponse
 from utils.train import generate_and_train
 from utils.visualize import save_weights_image
-import base64
 from io import BytesIO
 import matplotlib.pyplot as plt
 
+#%%
 app = FastAPI()
 
 class SOMRequest(BaseModel):
@@ -15,6 +17,7 @@ class SOMRequest(BaseModel):
     input_size: int = 10
     seed: int = 42
 
+#%%
 @app.post("/train")
 def train_som(request: SOMRequest):
     som = generate_and_train(
@@ -32,5 +35,6 @@ def train_som(request: SOMRequest):
     plt.tight_layout()
     plt.savefig(buf, format='png')
     buf.seek(0)
-    img_base64 = base64.b64encode(buf.read()).decode("utf-8")
-    return {"image_base64": img_base64}
+    return StreamingResponse(buf, media_type="image/png")
+
+# %%
