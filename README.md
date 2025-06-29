@@ -96,3 +96,18 @@ $$W_{i_{t+1}} = W_{i_t} + \alpha_t \theta_t (V_t - W_{i_t})$$
 So $W_{i_{t+1}}$ is the new value of the weight for the $i$th node, $V_t$ is the current value of the training data, $W_{i_t}$ is the current weight and $\alpha_t$ and $\theta_t$ are the learning rate and influence calculated above.
 
 *Note*: the $W$ and $V$ are vectors 
+
+### How to use
+
+1. Clone repo to local environment
+
+2. Build Docker image
+```docker build -f Dockerfile -t sop_image .```
+
+3. Run Docker image as container with port setup
+```docker run -d --name sop_app -p 8080:8080 sop_image:latest ```
+
+4. Send API request to container
+```curl -X POST http://localhost:8080/train -H "Content-Type: application/json" -d '{"width": 100, "height": 100, "iterations": 1000, "input_size": 10, "seed": 42}' --output som_output.png```
+
+
