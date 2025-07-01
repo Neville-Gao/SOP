@@ -29,12 +29,12 @@ def train_som(request: SOMRequest):
     )
 
     # Export image
-    buf = BytesIO()
+    buf = BytesIO() # BytesIO() is a class that lets you create an in-memory binary stream
     plt.imshow(som.get_weights())
     plt.axis('off')
     plt.tight_layout()
     plt.savefig(buf, format='png')
-    buf.seek(0)
+    buf.seek(0) # resets the file pointer (cursor) of the BytesIO back to the start of the stream
     return StreamingResponse(buf, media_type="image/png")
 
 # %%
