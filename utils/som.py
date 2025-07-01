@@ -44,8 +44,8 @@ class SOM:
         last_errors = []
 
         for t in range(n_iterations):
-            sigma_t = self.sigma0 * np.exp(-t / λ)
-            alpha_t = self.alpha0 * np.exp(-t / λ)
+            sigma_t = self.sigma0 * np.exp(-t / λ) # Radius
+            alpha_t = self.alpha0 * np.exp(-t / λ) # Learning Rate
 
             for vt in input_data:
                 diff = self.weights - vt
